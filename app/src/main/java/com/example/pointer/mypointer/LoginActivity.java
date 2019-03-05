@@ -96,9 +96,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private void clickLogin() {
         String account = accountEdit.getText().toString();
         String password = passwordEdit.getText().toString();
-        if (checkInput(account, password)) {
+        //if (checkInput(account, password)) {
             // TODO: 请求服务器登录账号
-        }
+            Intent intent = new Intent(this, UserMainActivity.class);
+            startActivity(intent);
+        //}
     }
 
     /**
