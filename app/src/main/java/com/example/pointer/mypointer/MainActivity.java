@@ -1,126 +1,58 @@
 package com.example.pointer.mypointer;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button mCameraStartBtn, mInfoStartBtn,mtest,mlocation;
-    private static final int PERMISSION_REQUEST_CAMERA = 0;
-    private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-    private boolean mLicenseChecked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        mCameraStartBtn=(Button) findViewById(R.id.btn_start_video);
-        mInfoStartBtn =(Button) findViewById(R.id.btn_start_info);
-        mtest=(Button)findViewById(R.id.test);
-        mlocation=findViewById(R.id.location);
-
-        mCameraStartBtn.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Permission has not been granted and must be requested.
-                        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                            // Provide an additional rationale to the user if the permission was not granted
-                            // and the user would benefit from additional context for the use of the permission.
-                        }
-                        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                                PERMISSION_REQUEST_CAMERA);
-                    } else {
-                          startActivity(new Intent(getApplicationContext(), MyPointerCameraActivity.class));
-                    }
-                } else {
-                     startActivity(new Intent(getApplicationContext(), MyPointerCameraActivity.class));
-                }
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
-
-        mInfoStartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Permission has not been granted and must be requested.
-                        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            // Provide an additional rationale to the user if the permission was not granted
-                            // and the user would benefit from additional context for the use of the permission.
-                        }
-                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
-                    } else {
-                         startActivity(new Intent(getApplicationContext(), MyPointerMineActivity.class));
-                    }
-                } else {
-                     startActivity(new Intent(getApplicationContext(), MyPointerMineActivity.class));
-                }
-            }
-        });
-        mtest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Permission has not been granted and must be requested.
-                        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                            // Provide an additional rationale to the user if the permission was not granted
-                            // and the user would benefit from additional context for the use of the permission.
-                        }
-                        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                                PERMISSION_REQUEST_CAMERA);
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), test.class));
-                    }
-                } else {
-                    startActivity(new Intent(getApplicationContext(), test.class));
-                }
-            }
-        });
-        mlocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MyLocationActivity.class));
-            }
-        });
-
     }
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_CAMERA) {
-            // Request for camera permission.
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission has been granted. Start camera preview Activity.
-                // startActivity(new Intent(getApplicationContext(), HumanActionCameraActivity.class));
-            } else {
-                // Permission request was denied.
-                Toast.makeText(this, "Camera权限被拒绝", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }else if(requestCode == PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // startActivity(new Intent(getApplicationContext(), HumanActionImageActivity.class));
-            } else {
-                // Permission request was denied.
-                Toast.makeText(this, "存储卡读写权限被拒绝", Toast.LENGTH_SHORT).show();
-            }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
-
+    public void enterLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

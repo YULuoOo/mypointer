@@ -34,7 +34,7 @@ public final class CameraCallBack implements android.view.SurfaceHolder.Callback
             mCamera.setPreviewCallback(this);
             Log.i(TAG, "开始预览");
             //调用旋转屏幕时自适应
-            //setCameraDisplayOrientation(MainActivity.this, mCurrentCamIndex, mCamera);
+            //setCameraDisplayOrientation(UserMainActivity.this, mCurrentCamIndex, mCamera);
         } catch (Exception e) {
         }
     }

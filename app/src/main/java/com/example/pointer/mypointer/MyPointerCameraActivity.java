@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.SurfaceTexture;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import android.view.SurfaceView;
 import com.example.pointer.mypointer.Camera.CameraCallBack;
 import com.example.pointer.mypointer.Camera.MyCamera;
 import com.example.pointer.mypointer.OpenGL.OpenGlRander;
-import com.example.pointer.mypointer.Utils.Accelerometer;
+import com.example.pointer.mypointer.utils.Accelerometer;
 
 public class MyPointerCameraActivity extends AppCompatActivity {
     String TAG="camerass";
