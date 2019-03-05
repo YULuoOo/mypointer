@@ -3,6 +3,7 @@ package com.example.pointer.mypointer;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button mCameraStartBtn, mInfoStartBtn,mtest;
+    Button mCameraStartBtn, mInfoStartBtn,mtest,mlocation;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private boolean mLicenseChecked = false;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         mCameraStartBtn=(Button) findViewById(R.id.btn_start_video);
         mInfoStartBtn =(Button) findViewById(R.id.btn_start_info);
         mtest=(Button)findViewById(R.id.test);
+        mlocation=findViewById(R.id.location);
 
         mCameraStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        mlocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MyLocationActivity.class));
+            }
+        });
 
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -113,4 +121,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
