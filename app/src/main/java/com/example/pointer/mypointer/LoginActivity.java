@@ -185,11 +185,28 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQUEST_CODE_TO_REGISTER:
+                //判断注册是否成功  如果注册成功
+                if(resultCode==RESULT_OK){
+                    //则获取data中的账号和密码  动态设置到EditText中
+                    String username=data.getStringExtra("username");
+                    String password=data.getStringExtra("password");
+                    accountEdit.setText(username);
+                    passwordEdit.setText(password);
+                }
+                break;
+        }
+    }
+
     /**
      * 跳转到忘记密码
      */
     private void enterForgetPwd() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ForgetPasswordActivity.class);
         startActivity(intent);
     }
 
@@ -197,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
      * 跳转到注册页面
      */
     private void enterRegister() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivityForResult(intent, REQUEST_CODE_TO_REGISTER);
     }
 
